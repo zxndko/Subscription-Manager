@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+==========================================================================
+【AI HANDOVER NOTE】
+1. DESIGN PHILOSOPHY:
+   - Atmosphere-First Dashboard: Clean, data-focused interface with Bento-style modular surfaces
+   - Neo-minimalism with Physicality: Subtle rim-light effects on cards, ambient shadows for depth
+   - Trust-building transparency: Clear visual hierarchy for billing data, status indicators, and KPIs
+   - This style supports subscription management's need for clarity, trust, and quick data scanning
+
+2. TYPOGRAPHY:
+   - Inter: Primary UI font for exceptional readability at small sizes (perfect for dashboard metrics)
+   - IBM Plex Sans Thai: Ensures proper Thai script rendering with matching geometric proportions
+   - JetBrains Mono: Used for numerical data, transaction IDs, and API keys display
+   - Font stack prioritizes legibility in dense information environments
+
+3. COLOR SYSTEM:
+   - Brand primary (Hue 220): Professional blue conveying trust and financial stability
+   - --brand maps to --primary for CTAs, --ring for focus states, --sidebar-primary for navigation
+   - Semantic colors: destructive (Hue 10, coral-red for overdue/failed payments), success (Hue 150, emerald for active subscriptions), warning (Hue 45, amber for renewal reminders)
+   - Muted tones create calm background for data-heavy interfaces
+   - Chart colors use distinct hues (260, 180, 30, 340, 200) for clear data differentiation
+
+4. USAGE GUIDE:
+   - Layout: Full-width dashboard with Bento card grid (use backdrop-blur on overlays)
+   - Apply subtle rim-light (1px top border with 50% opacity white/black) on cards
+   - Status indicators: Use semantic colors with 0.1 opacity backgrounds for pills
+   - Sidebar: Fixed navigation with --sidebar tokens for consistent theming
+   - Dark mode: Slightly elevated saturation for better contrast on dark backgrounds
+   - Accessibility: Maintain 4.5:1 contrast ratio minimum for all text
+==========================================================================
+*/
+
+:root {
+  /* Typography */
+  --font-sans: Inter, 'IBM Plex Sans Thai', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  
+  /* Radius */
+  --radius: 0.75rem;
+
+  /* Core UI Tokens */
+  --background: oklch(0.99 0.002 220);
+  --foreground: oklch(0.15 0.01 220);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.01 220);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.01 220);
+  --primary: oklch(0.52 0.18 220);
+  --primary-foreground: oklch(0.98 0.005 220);
+  --secondary: oklch(0.96 0.01 220);
+  --secondary-foreground: oklch(0.2 0.015 220);
+  --muted: oklch(0.97 0.005 220);
+  --muted-foreground: oklch(0.48 0.015 220);
+  --accent: oklch(0.95 0.02 220);
+  --accent-foreground: oklch(0.2 0.015 220);
+  --destructive: oklch(0.58 0.22 10);
+  --destructive-foreground: oklch(0.98 0.005 10);
+  --border: oklch(0.92 0.01 220);
+  --input: oklch(0.92 0.01 220);
+  --ring: oklch(0.52 0.18 220);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.55 0.2 260);
+  --chart-2: oklch(0.6 0.18 180);
+  --chart-3: oklch(0.65 0.2 30);
+  --chart-4: oklch(0.58 0.22 340);
+  --chart-5: oklch(0.52 0.16 200);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.2 0.015 220);
+  --sidebar-primary: oklch(0.52 0.18 220);
+  --sidebar-primary-foreground: oklch(0.98 0.005 220);
+  --sidebar-accent: oklch(0.95 0.02 220);
+  --sidebar-accent-foreground: oklch(0.2 0.015 220);
+  --sidebar-border: oklch(0.92 0.01 220);
+  --sidebar-ring: oklch(0.52 0.18 220);
+}
+
+.dark {
+  --background: oklch(0.12 0.015 220);
+  --foreground: oklch(0.95 0.01 220);
+  --card: oklch(0.16 0.02 220);
+  --card-foreground: oklch(0.95 0.01 220);
+  --popover: oklch(0.16 0.02 220);
+  --popover-foreground: oklch(0.95 0.01 220);
+  --primary: oklch(0.65 0.22 220);
+  --primary-foreground: oklch(0.12 0.015 220);
+  --secondary: oklch(0.22 0.025 220);
+  --secondary-foreground: oklch(0.9 0.015 220);
+  --muted: oklch(0.2 0.02 220);
+  --muted-foreground: oklch(0.65 0.02 220);
+  --accent: oklch(0.25 0.03 220);
+  --accent-foreground: oklch(0.9 0.015 220);
+  --destructive: oklch(0.62 0.25 10);
+  --destructive-foreground: oklch(0.95 0.01 10);
+  --border: oklch(0.25 0.025 220);
+  --input: oklch(0.25 0.025 220);
+  --ring: oklch(0.65 0.22 220);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.65 0.24 260);
+  --chart-2: oklch(0.68 0.22 180);
+  --chart-3: oklch(0.72 0.24 30);
+  --chart-4: oklch(0.65 0.26 340);
+  --chart-5: oklch(0.62 0.2 200);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.14 0.018 220);
+  --sidebar-foreground: oklch(0.88 0.015 220);
+  --sidebar-primary: oklch(0.65 0.22 220);
+  --sidebar-primary-foreground: oklch(0.12 0.015 220);
+  --sidebar-accent: oklch(0.25 0.03 220);
+  --sidebar-accent-foreground: oklch(0.9 0.015 220);
+  --sidebar-border: oklch(0.25 0.025 220);
+  --sidebar-ring: oklch(0.65 0.22 220);
+}
+
+@theme inline {
+  /* Shadcn Core Mapping */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Charts Mapping */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar Mapping */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans min-h-screen;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  code, pre {
+    @apply font-mono;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40;
+  }
+}
